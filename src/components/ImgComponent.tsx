@@ -63,7 +63,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
       );
     };
 
-    setTimeout(alterBackground, 100);
+    setTimeout(alterBackground, 50);
 
     return () => {
       // @ts-ignore
