@@ -63,7 +63,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
       );
     };
 
-    setTimeout(alterBackground, 50);
+    setTimeout(alterBackground, 100);
 
     return () => {
       // @ts-ignore
@@ -73,7 +73,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
 
   return (
     <div className="img-wrapper" style={{ background: bgColor }}>
-      <Image src={img} alt="placeholder" id={id} />
+      <Image src={img} alt="placeholder" id={id} priority />
     </div>
   );
 };
