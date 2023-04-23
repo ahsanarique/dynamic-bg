@@ -19,40 +19,41 @@ type imgData = {
   img: StaticImageData;
 };
 
+const imgArr = [
+  { id: img01.src, img: img01 },
+  { id: img02.src, img: img02 },
+  { id: img03.src, img: img03 },
+  { id: img04.src, img: img04 },
+  { id: img05.src, img: img05 },
+  { id: img06.src, img: img06 },
+  { id: img07.src, img: img07 },
+  { id: img08.src, img: img08 },
+  { id: img09.src, img: img09 },
+  { id: img10.src, img: img10 },
+  { id: img11.src, img: img11 },
+  { id: img12.src, img: img12 },
+];
+
 const ImgList = () => {
   const [currentImgSet, setCurrentImgSet] = useState<imgData[] | []>([]);
 
   useEffect(() => {
-    const imgArr = [
-      { id: img01.src, img: img01 },
-      { id: img02.src, img: img02 },
-      { id: img03.src, img: img03 },
-      { id: img04.src, img: img04 },
-      { id: img05.src, img: img05 },
-      { id: img06.src, img: img06 },
-      { id: img07.src, img: img07 },
-      { id: img08.src, img: img08 },
-      { id: img09.src, img: img09 },
-      { id: img10.src, img: img10 },
-      { id: img11.src, img: img11 },
-      { id: img12.src, img: img12 },
-    ];
-
     setCurrentImgSet(imgArr);
   }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      {currentImgSet.length > 0 ? (
+      {currentImgSet.length > 0 &&
         currentImgSet.map((currentImg: imgData) => (
           <ImgComponent
             key={currentImg.id}
             img={currentImg.img}
             id={currentImg.id}
           />
-        ))
-      ) : (
-        <p>No Image Added</p>
+        ))}
+
+      {currentImgSet.length === 0 && (
+        <p className="font-lg text-center">No Image Added</p>
       )}
     </div>
   );

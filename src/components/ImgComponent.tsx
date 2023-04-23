@@ -10,7 +10,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
   const [bgColor, setBgColor] = useState<string>("white");
 
   useEffect(() => {
-    const getAvarageRGB = (imgElement: any) => {
+    const getAverageRGB = (imgElement: any) => {
       const blockSize = 5;
       const defaultRGB = { r: 0, g: 0, b: 0 };
       const canvas = document.createElement("canvas");
@@ -43,7 +43,6 @@ const ImgComponent = ({ id, img }: imgProps) => {
 
       length = data.data.length;
 
-      //ts ignore
       while ((i += blockSize * 4) < length) {
         ++count;
         rgb.r += data.data[i];
@@ -58,10 +57,18 @@ const ImgComponent = ({ id, img }: imgProps) => {
       return rgb;
     };
 
-    const rgb = getAvarageRGB(document.getElementById(img.src));
+    const alterBackground = () => {
+      const rgb = getAverageRGB(document.getElementById(id));
+      setBgColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`);
+    };
 
-    setBgColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`);
-  }, [img.src]);
+    setTimeout(alterBackground, 10);
+
+    return () => {
+      // @ts-ignore
+      clearTimeout(alterBackground);
+    };
+  }, [id]);
 
   return (
     <div className="img-wrapper" style={{ background: bgColor }}>
