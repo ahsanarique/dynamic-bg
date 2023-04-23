@@ -73,7 +73,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
 
   return (
     <div className="img-wrapper" style={{ background: bgColor }}>
-      <Image src={img} alt="placeholder" id={id} priority />
+      <Image src={img} alt="placeholder" id={id} />
     </div>
   );
 };
