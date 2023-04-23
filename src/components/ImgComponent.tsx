@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 
 type imgProps = {
+  id: string;
   img: StaticImageData;
 };
 
-const ImgComponent = ({ img }: imgProps) => {
+const ImgComponent = ({ id, img }: imgProps) => {
   const [bgColor, setBgColor] = useState<string>("white");
 
   useEffect(() => {
@@ -42,6 +43,7 @@ const ImgComponent = ({ img }: imgProps) => {
 
       length = data.data.length;
 
+      //ts ignore
       while ((i += blockSize * 4) < length) {
         ++count;
         rgb.r += data.data[i];
@@ -61,11 +63,9 @@ const ImgComponent = ({ img }: imgProps) => {
     setBgColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`);
   }, [img.src]);
 
-  console.log(bgColor);
-
   return (
     <div className="img-wrapper" style={{ background: bgColor }}>
-      <Image src={img} alt="placeholder" id={img.src} />
+      <Image src={img} alt="placeholder" id={id} />
     </div>
   );
 };
