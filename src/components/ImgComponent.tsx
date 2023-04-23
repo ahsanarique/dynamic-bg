@@ -10,7 +10,7 @@ const ImgComponent = ({ id, img }: imgProps) => {
   const [bgColor, setBgColor] = useState<string>("white");
 
   useEffect(() => {
-    const getAverageRGB = async (imgElement: any) => {
+    const getAverageRGB = (imgElement: any) => {
       const blockSize = 5;
       const defaultRGB = { r: 0, g: 0, b: 0 };
       const canvas = document.createElement("canvas");
@@ -57,18 +57,8 @@ const ImgComponent = ({ id, img }: imgProps) => {
       return rgb;
     };
 
-    const alterBackground = () => {
-      getAverageRGB(document.getElementById(id)).then((rgb) =>
-        setBgColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`)
-      );
-    };
-
-    setTimeout(alterBackground, 100);
-
-    return () => {
-      // @ts-ignore
-      clearTimeout(alterBackground);
-    };
+    const rgb = getAverageRGB(document.getElementById(id));
+    setBgColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`);
   }, [id]);
 
   return (
